@@ -1,4 +1,4 @@
-class matrix {
+class matrix { //
   int rows ;
   int cols ;
   float elements[][];
