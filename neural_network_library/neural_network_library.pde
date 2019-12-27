@@ -1,31 +1,14 @@
-matrix m1; //<>// //<>//
-matrix m2; 
-matrix mr; 
-int rs1 = 6;
-int cs1 = 5;   
+import processing.core.PApplet;
+import processing.core.PConstants;
 
-int rs2 = 5;
-int cs2 = 3;  
-
+float[] inputs= {3,4,5,6,7};
+NeuralNetwork nn;
+//matrix m  ;
 void setup() {
- 
-  size(600, 600);
-  m1 = new matrix(rs1, cs1);
-  
-  m2 = new matrix(rs2, cs2);
-  //mr = new matrix(rs, cs);
-  m1.randomise(); //<>//
-
-  m1.transpose();
-  m1.printM(1);
-  
-  
+//m = new matrix(3,2);
+nn = new NeuralNetwork(2,3,1);
+nn.feedforward(inputs);
 }
 
 void draw () { // draw phase
 }
-
-void keyPressed() {
- 
-}
- 
