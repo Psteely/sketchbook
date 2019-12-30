@@ -72,7 +72,7 @@ class matrix { //
   }
 
   // matrix maths methods 
-  //
+  //////////////////////////////////
 
   void addMatrix ( float n) {
     for (int r= 0; r <rows; r++) {
@@ -89,6 +89,18 @@ class matrix { //
       }
     }
   }
+static matrix subMatrix ( matrix a, matrix b) {
+    matrix result = new matrix(a.rows,a.cols);
+    for (int r= 0; r <a.rows; r++) {
+      for  (int c= 0; c <a.cols; c++) {
+        result.elements[r][c] =  a.elements[r][c] - b.elements[r][c];
+      }
+    }
+    return result;
+  }
+
+
+
 
   // scalar element wise multiply  
   void multiply ( float n) {
@@ -125,26 +137,29 @@ class matrix { //
     }
     return result;
   }
-  void transpose () {
-    int newRows = cols;
-    int newCols = rows;
-    matrix result = new matrix(newRows, newCols);  // new matrix
-    for (int r= 0; r <rows; r++) {
-      for  (int c= 0; c <cols; c++) {
-        result.elements[c][r] =  elements[r][c];
+  static matrix transpose (matrix a) {
+    //int newRows = cols;
+    //int newCols = rows;
+    matrix result = new matrix(a.cols, a.rows);  // new matrix
+    for (int r= 0; r <a.rows; r++) {
+      for  (int c= 0; c <a.cols; c++) {
+        result.elements[c][r] =  a.elements[r][c];
       }
     }
-    //result.printM(1);
-    elements = null;
-    elements = result.elements;
-    cols = newCols;
-    rows = newRows;
+    return result;
   }
 
   void sigmoid() {
     for (int r= 0; r <rows; r++) {
       for  (int c= 0; c <cols; c++) {
         elements[r][c] = 1 / (1 + processing.core.PApplet.exp(-elements[r][c]));
+      }
+    }
+  }
+   void dsigmoid() {
+    for (int r= 0; r <rows; r++) {
+      for  (int c= 0; c <cols; c++) {
+        elements[r][c] *= (1-elements[r][c]);
       }
     }
   }
