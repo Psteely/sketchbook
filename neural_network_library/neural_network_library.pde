@@ -33,14 +33,14 @@ void setup() {
   td.add( new trainData(in, tgts));
   //
   inLayer = 2;
-  hiddenLayer = 2; 
+  hiddenLayer = 6; 
   outputLayer = 1;
   ffArray = new float[outputLayer];
   nn = new NeuralNetwork(inLayer, hiddenLayer, outputLayer);
 int rnd;
-for (int i=0;i<50000;i++) {
+for (int i=0;i<10000;i++) {
  rnd = int (random(4));
-  nn.train(td.get(rnd).Testinputs, td.get(rnd).Testtargets );
+  nn.train(td.get(rnd).Testinputs, td.get(rnd).Testtargets,0.2 );
 }
   ffArray = nn.feedforward(td.get(0).Testinputs);
   println(ffArray);

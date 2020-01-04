@@ -1,6 +1,6 @@
 class NeuralNetwork {
   int input, hidden, output;
-  float learningRate = 0.1;
+ 
 
   matrix weights_IH, weights_HO, bias_H, bias_O;
 
@@ -24,54 +24,61 @@ class NeuralNetwork {
 
   float[] feedforward(float[] inArray_) {
     // generate hidden outputs
-    matrix inArray = new matrix(inArray_.length, 1);
-    inArray.fromArray(inArray_);   //   this is now our inpus matrix
-    matrix hidden = new matrix(matrix.multiply(weights_IH, inArray));
+    matrix inMatrix = new matrix(inArray_.length, 1);
+    inMatrix.fromArray(inArray_);   //   this is now our inpus matrix
+    // all inputs multiplied by weights
+    matrix hidden = new matrix(matrix.multiply(weights_IH, inMatrix));
+    // add in the bias weights
     hidden.addMatrix(bias_H);
 
-    // activation function
+    // activation function on all weights (squish them to 0-1)
     hidden.sigmoid();
-    // Generating output outputs.
+    // Take these squished inputs and multiply them by the hidden wights
     matrix outMatrix = new matrix(matrix.multiply(weights_HO, hidden));
+    // add in the output bias
     outMatrix.addMatrix(bias_O);
+    //squish it again. This is now our guess. Between 0-1
     outMatrix.sigmoid();
     // return as an array
     float[] ffArray = new float[output];
     ffArray = matrix.toArray(outMatrix);
     return ffArray;
   }
-  void train (float[] inArray_, float[] targets_) {
-
+  void train (float[] inArray_, float[] targets_, float lr_) {
+     // ************  From here ***********************************
+     // *********** is really just the feed forward bit ***********
     // generate hidden outputs
     matrix inputs = new matrix(inArray_.length, 1);
     inputs.fromArray(inArray_);   //   this is now our inpus matrix
+    // all inputs multiplied by weights
     matrix hidden = new matrix(matrix.multiply(weights_IH, inputs));
+    // Add in the bias weight
     hidden.addMatrix(bias_H);
 
-    // activation function
+    // activation function squish to 0-1
     hidden.sigmoid();
     // Generating output outputs.
     matrix outMatrix = new matrix(matrix.multiply(weights_HO, hidden));
+    // Take the squished hidden and multiply by the hidden weights.
     outMatrix.addMatrix(bias_O);
+    //Squish it
     outMatrix.sigmoid();
-    /////////
-    //float[] result = new float[inArray_.length];
-    //result = feedforward(inArray_);  //  now we have the result as an array.
-    // This is the back progation bit.
-    //matrix matrixScore  = new matrix(result.length,1);
-    //matrixScore.fromArray(result) ;    // score as a matrix
-
+    
+    // ************  to here  **************************************
+    // Now we need to do the back propogation
+    // Get the targets as a matrix
     matrix matrixTargets  = new matrix(targets_.length, 1);
     matrixTargets.fromArray(targets_)  ;   // targets as a matrix
     // This gives us our output errors matrix.
-    //matrix output_errors  = new matrix(result.length,1);
     matrix output_errors = new matrix (matrix.subMatrix(matrixTargets, outMatrix));
 
-    // Now we have our output and hidden errors we need the gradient descent bit. 
-
+    // Now we have our output errors we need the gradient descent bit. 
+    // sigmoid derivative
     outMatrix.dsigmoid();
+    // multiplied by the output errors
     outMatrix.multiply(output_errors);  
-    outMatrix.multiply(learningRate);
+    // multiplied by the learning rate
+    outMatrix.multiply(lr_);
     //update bias
     bias_O.addMatrix(outMatrix);
     
@@ -87,9 +94,10 @@ class NeuralNetwork {
     // get the hidden layers errors.
     matrix hidden_errors = new matrix(matrix.multiply(weights_HO_T, output_errors));
     // hidden gradient
+    // sigmoid derivative
     hidden.dsigmoid();
     hidden.multiply(hidden_errors);
-    hidden.multiply(learningRate);
+    hidden.multiply(lr_);
     // adjust bias
     bias_H.addMatrix(hidden);
     
