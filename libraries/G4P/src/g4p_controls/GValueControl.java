@@ -97,7 +97,7 @@ public abstract class GValueControl extends GAbstractControl {
 	/**
 	 * This should be overridden in child classes so they can perform any class specific
 	 * actions when the value changes.
-	 * Override this in GSlider to change the hotshot poaition.
+	 * Override this in GSlider to change the hotshot position.
 	 */
 	protected void updateDueToValueChanging(){
 	}

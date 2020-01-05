@@ -74,7 +74,7 @@ public final class StyledString implements GConstantsInternal, Serializable {
 	transient private ImageGraphicAttribute spacer = null;
 	transient private LineBreakMeasurer lineMeasurer = null;
 	transient private LinkedList<TextLayoutInfo> linesInfo = new LinkedList<TextLayoutInfo>();
-	transient private Font font = null;
+	transient private Font font = null; // Only used to detect change in Graphics2D buffer
 
 	private static final char EOL = '\n';
 
@@ -767,17 +767,18 @@ public final class StyledString implements GConstantsInternal, Serializable {
 	}
 
 	private void setFont(Font a_font){
-		if(a_font != null && a_font != font){
-			font = a_font;
+		if(a_font != null) { // && a_font != font){
+//			Log.logger().info("New font: " + a_font);
+//			font = a_font;
 			baseStyle.clear();
-			baseStyle.add(new AttributeRun(TextAttribute.FAMILY, font.getFamily()));
-			baseStyle.add(new AttributeRun(TextAttribute.SIZE, font.getSize()));
+			baseStyle.add(new AttributeRun(TextAttribute.FAMILY, a_font.getFamily()));
+			baseStyle.add(new AttributeRun(TextAttribute.SIZE, a_font.getSize()));
 			baseStyle.add(new AttributeRun(TextAttribute.WIDTH, TextAttribute.WIDTH_REGULAR));
-			if(font.isBold())
+			if(a_font.isBold())
 				baseStyle.add(new AttributeRun(TextAttribute.WEIGHT, TextAttribute.WEIGHT_REGULAR));
 			else
 				baseStyle.add(new AttributeRun(TextAttribute.WEIGHT, TextAttribute.WEIGHT_REGULAR));	
-			if(font.isItalic())
+			if(a_font.isItalic())
 				baseStyle.add(new AttributeRun(TextAttribute.POSTURE, TextAttribute.POSTURE_OBLIQUE));	
 			else
 				baseStyle.add(new AttributeRun(TextAttribute.POSTURE, TextAttribute.POSTURE_REGULAR));	
@@ -798,13 +799,14 @@ public final class StyledString implements GConstantsInternal, Serializable {
 	 */
 	public LinkedList<TextLayoutInfo> getLines(Graphics2D g2d){
 		if(font != g2d.getFont()){
+			Log.logger().info("\tfont= " + (font==null?"null":font.toString()) + "\n\tg2d = " + g2d.toString() +"\n\t" + plainText);
 			setFont(g2d.getFont());
 			invalidText = true;
 		}
 		if(invalidText){
 			styledText = new AttributedString(plainText);
 			styledText = insertParagraphMarkers(plainText, styledText);
-			setFont(font);
+			setFont(g2d.getFont());
 			applyAttributes();
 			invalidText = false;
 			invalidLayout = true;

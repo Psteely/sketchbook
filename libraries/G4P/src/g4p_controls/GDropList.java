@@ -179,6 +179,12 @@ public class GDropList extends GTextBase {
 				);
 		registeredMethods = DRAW_METHOD | MOUSE_METHOD;
 		cursorOver = HAND;
+
+		// Font to use
+		localFont = G4P.displayFont;
+		bufferInvalid = true;
+
+		// Must register control
 		G4P.registerControl(this);
 	}
 

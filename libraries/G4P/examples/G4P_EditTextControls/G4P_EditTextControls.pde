@@ -8,8 +8,8 @@
  - Default text
  - Copy and paste text
  
- for Processing V2 and V3
- (c) 2015 Peter Lager
+ for Processing V3
+ (c) 2019 Peter Lager
  
  */
 
@@ -23,6 +23,7 @@ GLabel lblPwd;
 
 public void setup() {
   size(500, 300);
+  G4P.setInputFont("Times New Roman", G4P.PLAIN, 14); // New for G4P V4.3
   G4P.setGlobalColorScheme(GCScheme.PURPLE_SCHEME);
   // Some start text
   String[] paragraphs = loadStrings("book3.txt");

@@ -95,7 +95,7 @@ public final class GPassword extends GAbstractControl implements Focusable{
 	protected int endChar = -1, startChar = -1, pos = endChar, nbr = 0, adjust = 0;
 	protected boolean textChanged = false;
 
-	protected Font localFont = G4P.globalFont;
+	protected Font localFont = G4P.inputFont;
 	
 	/**
 	 * Create a password field without a scrollbar.
@@ -166,9 +166,13 @@ public final class GPassword extends GAbstractControl implements Focusable{
 				new String[]{ "pwordControl", "event" } 
 				);
 		registeredMethods = PRE_METHOD | DRAW_METHOD | MOUSE_METHOD | KEY_METHOD;
+
+		// Font to use
+		localFont = G4P.inputFont;
+		bufferInvalid = true;
+
 		// Must register control
 		G4P.registerControl(this);
-		bufferInvalid = true;
 	}
 
 	/**
@@ -215,9 +219,9 @@ public final class GPassword extends GAbstractControl implements Focusable{
 	 * @param font AWT font to use
 	 */
 	public void setFont(Font font) {
-		if(font != null && font != localFont && buffer != null){
+		if(font != null && font != localFont) { // && buffer != null){
 			localFont = font;
-			buffer.g2.setFont(localFont);
+//			buffer.g2.setFont(localFont);
 			bufferInvalid = true;
 		}
 	}

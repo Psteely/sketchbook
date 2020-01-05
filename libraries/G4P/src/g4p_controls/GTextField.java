@@ -132,9 +132,12 @@ public class GTextField extends GEditableTextControl {
 				);
 		registeredMethods = PRE_METHOD | DRAW_METHOD | MOUSE_METHOD | KEY_METHOD;
 
+		// Font to use
+		localFont = G4P.inputFont;
+		bufferInvalid = true;
+
 		// Must register control
 		G4P.registerControl(this);
-		bufferInvalid = true;
 	}
 
 	/**

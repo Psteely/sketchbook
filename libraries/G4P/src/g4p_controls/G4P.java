@@ -93,24 +93,26 @@ public class G4P implements GConstants, PConstants {
 	 * @return the pretty version of the library. This will be shown in Processing
 	 */
 	public static String getPrettyVersion() {
-		return "4.2.3";
+		return "4.3.1";
 	}
 
 	/**
 	 * @return the version of the library. 
 	 */
 	public static String getVersion() {
-		return "38";
+		return "40";
 	}
 
 	static int globalColorScheme = GCScheme.BLUE_SCHEME;
 	static int globalAlpha = 255;
 
+	// Font used for all text input controls
+	static Font inputFont = new Font("Arial", Font.PLAIN, 12);
 	// Font used for all text controls
-	static Font globalFont = FontManager.getPriorityFont(null, Font.PLAIN, 12);
+	static Font displayFont = new Font("Arial", Font.PLAIN, 12);
 	// Font used for slider numbers
-	static Font numericLabelFont = FontManager.getPriorityFont(null, Font.BOLD, 11);;
-
+	static Font sliderFont = new Font("Arial", Font.BOLD, 11);
+	
 	// Used to order controls
 	static GAbstractControl.Z_Order zorder = new GAbstractControl.Z_Order();
 
@@ -224,8 +226,49 @@ public class G4P implements GConstants, PConstants {
 	 * If this is causing a problem then call this method before creating any controls.
 	 */
 	public static void usePre35Fonts(){
-		globalFont = new Font("Dialog", Font.PLAIN, 10);
-		numericLabelFont = new Font("DialogInput", Font.BOLD, 12);
+		displayFont = new Font("Dialog", Font.PLAIN, 10);
+		sliderFont = new Font("DialogInput", Font.BOLD, 12);
+	}
+
+
+	/**
+	 * Set the text font to be used for keyboard input into GTexField, GTextArea 
+	 * and GPassword controls. It only effects input controls created after
+	 * this method is called. <br> <br>
+	 * If it can't find the font on your system it will use [Arial, PLAIN, 12]
+	 * 
+	 * @param familyName font family name e.g. "Arial", "Trebuchet MS", "Tahoma", "Helvetica", "Verdana"
+	 * @param style some combination of G4P.PLAIN, G4P.BOLD and G4P.ITALIC
+	 * @param size the font size (constrained to  >= 6 point)
+	 */
+	public static void setInputFont(String familyName, int style, int size) {
+		inputFont = new Font(familyName, style, Math.max(size,  6));
+	}
+
+	/**
+	 * Set the display font to be used with Buttons, labels, droplists panels etc.
+	 * It only effects controls created after this method is called. <br> <br>
+	 * If it can't find the font on your system it will use [Arial, PLAIN, 12]
+	 * 
+	 * @param familyName font family name e.g. "Arial", "Trebuchet MS", "Tahoma", "Helvetica", "Verdana"
+	 * @param style some combination of G4P.PLAIN, G4P.BOLD and G4P.ITALIC
+	 * @param size the font size (constrained to  >= 6 point)
+	 */
+	public static void setDisplayFont(String familyName, int style, int size) {
+		displayFont = new Font(familyName, style, Math.max(size,  6));
+	}
+
+	/**
+	 * Set the font to be used with sliders. It only effects sliders created after
+	 * this method is called. <br>
+	 * If it can't find the font on your system it will use [Arial, BOLD, 11]
+	 * 
+	 * @param familyName font family name e.g. "Arial", "Trebuchet MS", "Tahoma", "Helvetica", "Verdana"
+	 * @param style some combination of G4P.PLAIN, G4P.BOLD and G4P.ITALIC
+	 * @param size the font size (constrained to  >= 6 point)
+	 */
+	public static void setSliderFont(String familyName, int style, int size) {
+		sliderFont = new Font(familyName, style, Math.max(size,  6));
 	}
 
 	/**
@@ -288,7 +331,7 @@ public class G4P implements GConstants, PConstants {
 	static void announceG4P(){
 		if(!announced){
 			System.out.println("=======================================================");
-			System.out.println("   G4P V4.2.3 created by Peter Lager");
+			System.out.println("   G4P V4.3.1 created by Peter Lager");
 			System.out.println("=======================================================");
 			announced = true;
 		}
@@ -518,7 +561,7 @@ public class G4P implements GConstants, PConstants {
 	public static int selectColor(){
 		return selectColorImpl(null);
 	}
-	
+
 	/**
 	 * This will open a version of the Java Swing color chooser dialog. The dialog's
 	 * UI is dependent on the OS and JVM implementation running. <br>
@@ -531,7 +574,7 @@ public class G4P implements GConstants, PConstants {
 	public static int selectColor(Color color){
 		return selectColorImpl(color);
 	}
-	
+
 	/**
 	 * This will open a version of the Java Swing color chooser dialog. The dialog's
 	 * UI is dependent on the OS and JVM implementation running. <br>
@@ -544,7 +587,7 @@ public class G4P implements GConstants, PConstants {
 	public static int selectColor(int color){
 		return selectColorImpl(new Color(color));
 	}
-	
+
 	/**
 	 * This will open a version of the Java Swing color chooser dialog. The dialog's
 	 * UI is dependent on the OS and JVM implementation running. <br>
@@ -563,7 +606,7 @@ public class G4P implements GConstants, PConstants {
 		blue &= 255;
 		return selectColorImpl(new Color(red, green, blue));
 	}
-	
+
 	/**
 	 * This will open a version of the Java Swing color chooser dialog. The dialog's
 	 * UI is dependent on the OS and JVM implementation running. <br>
@@ -613,7 +656,7 @@ public class G4P implements GConstants, PConstants {
 		dialog.setVisible(true);
 		return lastColor.getRGB();
 	}
-	
+
 
 	/**
 	 * Select a folder from the local file system.
@@ -957,12 +1000,12 @@ public class G4P implements GConstants, PConstants {
 	 * @param message the text to be displayed in the main area of the dialog
 	 * @param title the text to appear in the dialog's title bar.
 	 * @param messageType the message type
-     * @param optionType an integer designating the options available on the dialog
-     *                  <code>DEFAULT_OPTION</code>,
-     *                  <code>YES_NO_OPTION</code>,
-     *                  <code>YES_NO_CANCEL_OPTION</code>,
-     *                  or <code>OK_CANCEL_OPTION</code>	 
-     * @return which button was clicked
+	 * @param optionType an integer designating the options available on the dialog
+	 *                  <code>DEFAULT_OPTION</code>,
+	 *                  <code>YES_NO_OPTION</code>,
+	 *                  <code>YES_NO_CANCEL_OPTION</code>,
+	 *                  or <code>OK_CANCEL_OPTION</code>	 
+	 * @return which button was clicked
 	 */
 	public static int selectOption(PApplet owner, String message, String title, int messageType, int optionType){
 		Frame frame = getFrame(owner);

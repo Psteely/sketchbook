@@ -460,6 +460,7 @@ public class GSlider2D extends GValueControl2D {
 				offsetV = oy - parametricPosY * dragHeight; // normalised
 				takeFocus();
 				bufferInvalid = true;
+				fireEvent(this, GEvent.PRESSED);
 			}
 			break;
 		case MouseEvent.CLICK:
@@ -470,18 +471,20 @@ public class GSlider2D extends GValueControl2D {
 				status = OFF_CONTROL;
 				loseFocus(null);
 				bufferInvalid = true;
+				fireEvent(this, GEvent.CLICKED);
 			}
 			break;
 		case MouseEvent.RELEASE:
 			if(focusIsWith == this && dragging){
+				dragging = false;
 				if(downHotSpot == THUMB_SPOT){
 					mouseUpdateTargets();
 				}
 				status = OFF_CONTROL;
 				bufferInvalid = true;
 				loseFocus(null);				
+				fireEvent(this, GEvent.RELEASED);
 			}
-			dragging = false;
 			break;
 		case MouseEvent.DRAG:
 			if(focusIsWith == this){

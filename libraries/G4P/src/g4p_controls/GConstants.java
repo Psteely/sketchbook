@@ -23,6 +23,7 @@
 
 package g4p_controls;
 
+import java.awt.Font;
 import java.awt.font.TextAttribute;
 
 import javax.swing.JOptionPane;
@@ -108,14 +109,19 @@ public interface GConstants {
 	int X4 				= 1;
 	int X8 				= 2;
 
+	// Font style 
+	int PLAIN 	= Font.PLAIN;
+	int BOLD 	= Font.BOLD;
+	int ITALIC	= Font.ITALIC;
+	
 	// Modal dialog messages
 	// Message types
-	int PLAIN 			= JOptionPane.PLAIN_MESSAGE;
-	int ERROR			= JOptionPane.ERROR_MESSAGE;
-	int INFO			= JOptionPane.INFORMATION_MESSAGE;
-	int WARNING			= JOptionPane.WARNING_MESSAGE;
-	int QUERY			= JOptionPane.QUESTION_MESSAGE;
-	
+	int PLAIN_MESSAGE 		= JOptionPane.PLAIN_MESSAGE;
+	int ERROR_MESSAGE		= JOptionPane.ERROR_MESSAGE;
+	int INFO_MESSAGE		= JOptionPane.INFORMATION_MESSAGE;
+	int WARN_MESSAGE		= JOptionPane.WARNING_MESSAGE;
+	int QUERY_MESSAGE		= JOptionPane.QUESTION_MESSAGE;
+
 	// Option types
 	int YES_NO			= JOptionPane.YES_NO_OPTION;
 	int YES_NO_CANCEL	= JOptionPane.YES_NO_CANCEL_OPTION;

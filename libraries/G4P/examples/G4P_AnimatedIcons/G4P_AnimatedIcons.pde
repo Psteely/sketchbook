@@ -10,7 +10,7 @@
  GAnimIcon. This is done below with the GOtion controls.
  
  for Processing V3
- (c) 2016 Peter Lager
+ (c) 2019 Peter Lager
  */
 
 import g4p_controls.*;
@@ -23,6 +23,8 @@ GOption option0, option1, option2;
 
 public void setup() {
   size(455, 370);
+  // Set display font to be used (new to G4P V4.3)
+  G4P.setDisplayFont("Arial", G4P.BOLD, 14);
   createControlsWithAnimatedIcons();
   createGUI();
 }
@@ -39,12 +41,14 @@ public void handleButtonEvents(GButton source, GEvent event) {
     time.setText(millis()/1000 + " seconds");
 }
 
+// Controls the speed of stick man when running
 public void handleSliderEvents(GValueControl source, GEvent event) {
   if (source == intervalSlider && event == GEvent.VALUE_CHANGING) {    
     label.getIcon().setInterval(intervalSlider.getValueI());
   }
 }
 
+// Control which animation to use for stick man
 public void handleToggleControlEvents(GToggleControl source, GEvent event) { 
   if (source == left) {
     label.getIcon().setInterval("TO LEFT", intervalSlider.getValueI());
@@ -58,6 +62,7 @@ public void handleToggleControlEvents(GToggleControl source, GEvent event) {
   }
 }
 
+// Create the animated icons and add them to the controls
 public void createControlsWithAnimatedIcons() {
   GAnimIcon ai;
   button = new GButton(this, 10, 60, 150, 100);
@@ -74,7 +79,9 @@ public void createControlsWithAnimatedIcons() {
   // Stores 2 animation clips of the man running continuously (looped) and a single 
   // non-looped animation of him standing.
   ai = new GAnimIcon(this, "stickman.png", 5, 3, 100);
-  ai.storeAnim("TO LEFT", 0, 4, 100).storeAnim("TO RIGHT", 5, 9, 100).storeAnim("STILL", 10, 10, 100, 1);
+  ai.storeAnim("TO LEFT", 0, 4, 100)
+    .storeAnim("TO RIGHT", 5, 9, 100)
+    .storeAnim("STILL", 10, 10, 100, 1);
   label.setTextAlign(GAlign.CENTER, null);
   label.setIcon(ai, GAlign.NORTH, null, null);
   label.getIcon().animate("TO LEFT");

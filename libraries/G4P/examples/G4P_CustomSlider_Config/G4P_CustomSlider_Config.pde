@@ -6,8 +6,8 @@
  slider returns values in the range 0.0 to 1.0 inclusive. 
  Use setLimits() to set your own range.
  
- for Processing V2 and V3
- (c) 2015 Peter Lager
+ for Processing V3
+ (c) 2019 Peter Lager
  
  */
 
@@ -18,7 +18,9 @@ int bgcol = 128;
 
 public void setup() {
   size(500, 360);
-  G4P.setCursor(CROSS);
+  cursor(CROSS);
+  G4P.setSliderFont("Courier New", G4P.BOLD, 11);
+  G4P.setDisplayFont("Arial", G4P.BOLD, 12);
   sdr = new GCustomSlider(this, 55, 70, 200, 120, "blue18px");
   makeSliderConfigControls();
 }

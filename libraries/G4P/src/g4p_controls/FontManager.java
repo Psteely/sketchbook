@@ -37,11 +37,11 @@ import java.awt.Font;
  * @author Peter Lager
  *
  */
-public class FontManager {
+class FontManager {
 
 
 	/** Default list of font family names in priority order */
-	private static String[] pfnames = {"Arial", "Trebuchet MS", "Tahoma", "Helvetica", "Verdana" };
+//	private static String[] pfnames = {"Arial", "Trebuchet MS", "Tahoma", "Helvetica", "Verdana" };
 	
 
 	/**
@@ -54,16 +54,16 @@ public class FontManager {
 	 * @param size font size
 	 * @return a system font, or if none found a logical font
 	 */
-	public static Font getPriorityFont(String[] familyFontNamnes, int style, int size){
-		Font font = null;
-		String[] names = (familyFontNamnes == null || familyFontNamnes.length == 0)
-				? pfnames : familyFontNamnes;
-		for(String name : names){
-			font = getFont(name, style, size);
-			if(font != null) return font;
-		}
-		return getFont("Dialog", style, size);
-	}
+//	static Font getPriorityFont(String[] familyFontNamnes, int style, int size){
+//		Font font = null;
+//		String[] names = (familyFontNamnes == null || familyFontNamnes.length == 0)
+//				? pfnames : familyFontNamnes;
+//		for(String name : names){
+//			font = getFont(name, style, size);
+//			if(font != null) return font;
+//		}
+//		return getFont("Dialog", style, size);
+//	}
 	
 	/**
 	 * Get a system font that matches the font family name, style and size. If 
@@ -74,11 +74,11 @@ public class FontManager {
 	 * @param size font size
 	 * @return a system font from the specified family name, if not found returns null
 	 */
-	public static Font getFont(String familyName, int style, int size){
-		Font font = new Font(familyName, style, size);
-		if(familyName.equalsIgnoreCase(font.getFamily()))
-			return font;
-		return null;
-	}
+//	static Font getFont(String familyName, int style, int size){
+//		Font font = new Font(familyName, style, size);
+//		if(familyName.equalsIgnoreCase(font.getFamily()))
+//			return font;
+//		return null;
+//	}
 	
 }

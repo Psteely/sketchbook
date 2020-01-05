@@ -68,15 +68,16 @@ public enum GEvent {
 	EXPANDED 			( "EXPANDED", "Control was expanded" ),
 	DRAGGED 			( "DRAGGED", "Control is being dragged" ),
 
-	// Button control events (PRESSED and RELEASED are not fired by default)
-	CLICKED  			( "CLICKED", "Mouse button was clicked" ),
-	PRESSED  			( "PRESSED", "Mouse button was clicked" ),
+	// Button / slider control events 
+	// Note: for  buttons only PRESSED and RELEASED events are not fired by default
+	CLICKED  			( "CLICKED", "Mouse button was clicked over control" ),
+	PRESSED  			( "PRESSED", "Mouse button was pressed over control" ),
 	RELEASED  			( "RELEASED", "Mouse button was clicked" ),
 
-	// Slider control events events 
+	// Slider control events 
+	// VALUE_??? events are fired during easing 
 	VALUE_CHANGING		( "VALUE_CHANGING", "Value is changing" ),
 	VALUE_STEADY		( "VALUE_STEADY", "Value has reached a steady state" ),
-	DRAGGING			( "DRAGGING", "The mouse is being dragged over a component"),
 	
 	// GCheckbox & GOption events
 	SELECTED			( "SELECTED", "Option selected" ),

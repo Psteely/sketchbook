@@ -39,7 +39,7 @@ public abstract class GTextBase extends GAbstractControl {
 	/** The styled text used by this control */
 	protected StyledString stext = new StyledString("");
 	
-	protected Font localFont = G4P.globalFont;
+	protected Font localFont = G4P.displayFont;
 	
 
 	/**
@@ -53,7 +53,7 @@ public abstract class GTextBase extends GAbstractControl {
 	public GTextBase(PApplet theApplet, float p0, float p1, float p2, float p3) {
 		super(theApplet, p0, p1, p2, p3);
 		makeBuffer();
-		setFont(localFont);
+//		setFont(localFont);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public abstract class GTextBase extends GAbstractControl {
 	public void setFont(Font font) {
 		if(font != null && localFont != font) {
 			localFont = font;
-			buffer.g2.setFont(localFont);
+//			buffer.g2.setFont(localFont);
 			bufferInvalid = true;
 		}
 	}

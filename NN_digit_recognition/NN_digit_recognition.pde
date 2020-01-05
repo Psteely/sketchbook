@@ -1,4 +1,6 @@
-// MNIST csv are here https://pjreddie.com/projects/mnist-in-csv/  //<>// //<>//
+ //<>// //<>//
+
+// MNIST csv are here https://pjreddie.com/projects/mnist-in-csv/ 
 NeuralNetwork nn;
 int in = 784;
 int middle = 256;
@@ -28,12 +30,12 @@ void setup() {
 void draw() {
 
   background(255);
-  if (training != null) {
-    for (int i = 0; i < csvReader.getColumnCount()-1; i++) {
-      fill(training[2][i]*255);
-      rect(pixelSize * (i % 28), pixelSize * (i / 28), pixelSize, pixelSize);
-    }
-  }
+  //if (training != null) {
+  //  for (int i = 0; i < csvReader.getColumnCount()-1; i++) {
+  //    fill(training[2][i]*255);
+  //    rect(pixelSize * (i % 28), pixelSize * (i / 28), pixelSize, pixelSize);
+  //  }
+  //}
 }
 
 void keyPressed() {

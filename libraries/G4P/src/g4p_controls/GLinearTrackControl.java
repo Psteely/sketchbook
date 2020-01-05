@@ -61,7 +61,7 @@ public abstract class GLinearTrackControl extends GValueControl {
 	protected boolean labelsInvalid = true;
 
 	// Introduced 4.0.2
-	protected Font localFont = G4P.numericLabelFont;
+	protected Font localFont = G4P.sliderFont;
 
 	public GLinearTrackControl(PApplet theApplet, float p0, float p1, float p2, float p3) {
 		super(theApplet, p0, p1, p2, p3);
@@ -188,6 +188,7 @@ public abstract class GLinearTrackControl extends GValueControl {
 				offset = ox + 0.5f - parametricPos; // normalised
 				takeFocus();
 				bufferInvalid = true;
+				fireEvent(this, GEvent.PRESSED);
 			}
 			break;
 		case MouseEvent.CLICK:
@@ -198,14 +199,17 @@ public abstract class GLinearTrackControl extends GValueControl {
 				status = OFF_CONTROL;
 				loseFocus(null);
 				bufferInvalid = true;
+				fireEvent(this, GEvent.CLICKED);
 			}
 			break;
 		case MouseEvent.WHEEL:
-			if(currSpot > -1 && z >= focusObjectZ())
+			if(currSpot > -1 && z >= focusObjectZ()) {
 				parametricTarget = calcParametricTarget(parametricTarget + event.getCount() * wheelDelta * G4P.wheelForSlider);
+			}
 			break;
 		case MouseEvent.RELEASE:
 			if(focusIsWith == this && dragging){
+				dragging = false;
 				if(downHotSpot == THUMB_SPOT){
 					parametricTarget = (ox - offset) + 0.5f;
 					if(parametricTarget < 0 || parametricTarget > 1)
@@ -214,9 +218,9 @@ public abstract class GLinearTrackControl extends GValueControl {
 				}
 				status = OFF_CONTROL;
 				bufferInvalid = true;
-				loseFocus(null);				
+				loseFocus(null);	
+				fireEvent(this, GEvent.RELEASED);
 			}
-			dragging = false;
 			break;
 		case MouseEvent.DRAG:
 			if(focusIsWith == this){

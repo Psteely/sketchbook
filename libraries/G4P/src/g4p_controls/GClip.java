@@ -52,7 +52,7 @@ import java.awt.datatransfer.Transferable;
  */
 
 /**
- * Clipboard functionaliy for plain text <br>
+ * Clipboard functionality for plain text <br>
  * 
  * This provides clipboard functionality for text and is currently only used by the 
  * GTextField and GTextArea classes.

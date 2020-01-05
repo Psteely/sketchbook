@@ -15,7 +15,7 @@
  G4P_CustomSlider_Config.
  
  for Processing V2 and V3
- (c) 2015 Peter Lager
+ (c) 2019 Peter Lager
  
  */
 
@@ -25,7 +25,8 @@ GCustomSlider sdr1, sdr2, sdr3, sdr4, sdr5, sdr6, sdr7;
 
 void setup() {
   size(600, 280);  
-
+  G4P.setSliderFont("Courier", G4P.BOLD, 10); // New for G4P V4.3
+  cursor(CROSS);
   //=============================================================
   // Simple default slider,
   // constructor is `Parent applet', the x, y position and length

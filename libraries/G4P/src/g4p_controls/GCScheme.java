@@ -45,8 +45,8 @@ import processing.core.PImage;
  */
 public class GCScheme implements GConstants, PConstants {
 
-	private static Color[][] palettes = null;
-
+	private static Color[][] palettes = null; // need this to be null so it will look for of user palette
+	
 	/**
 	 * Set the color scheme to one of the preset schemes
 	 * BLUE / GREEN / RED /  PURPLE / YELLOW / CYAN / BROWN
@@ -149,7 +149,7 @@ public class GCScheme implements GConstants, PConstants {
 		}
 		pg.endDraw();
 		filename = app.dataPath("") + "/" + filename;
-		System.out.println(filename);
+//		System.out.println(filename);
 		pg.save(filename);
 	}
 
@@ -161,13 +161,13 @@ public class GCScheme implements GConstants, PConstants {
 	 * This method is called by
 	 * @param app the PApplet using this scheme
 	 */
-	public static void makeColorSchemes(PApplet app) {
+	protected static void makeColorSchemes(PApplet app) {
 		// If the palettes have not been created then create them
 		// otherwise do nothing
 		if(palettes != null)
 			return;
 		// Load the image
-		PImage image = null;;
+		PImage image = null;
 		InputStream is = app.createInputRaw("user_gui_palette.png");
 		if(is != null){ // file exists so close the input stream and load it
 			try {

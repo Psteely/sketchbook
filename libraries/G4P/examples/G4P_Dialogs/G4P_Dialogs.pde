@@ -2,12 +2,24 @@
  Simple sketch to experiment with the different dialogs
  available to you in the G4P library.
  
-  The file dialogs match the behaviour of those in Processing 
- V1.5.1 i.e. immediate mode rather than on a seperate thread
+ The file dialogs match the behaviour of those in Processing 
+ V1.5.1 i.e. immediate mode rather than on a separate thread
  as in V2 and V3
  
- for Processing V2 and V3
- (c) 2018 Peter Lager
+ IMPORTANT NOTE:
+ In version 4.3 and later the message type constants were changed
+ Pre V4.3   V4.3 an later
+ PLAIN      PLAIN_MESSAGE;
+ ERROR      ERROR_MESSAGE;
+ INFO       INFO_MESSAGE;
+ WARNING    WARN_MESSAGE;
+ QUERY      QUERY_MESSAGE;
+ 
+ Constants must be prefixed with 'G4P.' e.g.
+ <preG4P.PLAIN_MESSAGE</pre>
+ 
+ for Processing V3
+ (c) 2019 Peter Lager
  
  */
 
@@ -73,19 +85,19 @@ public void handleMessageDialog() {
   switch(md_mtype) {
   default:
   case 0: 
-    mtype = G4P.PLAIN; 
+    mtype = G4P.PLAIN_MESSAGE; 
     break;
   case 1: 
-    mtype = G4P.ERROR; 
+    mtype = G4P.ERROR_MESSAGE; 
     break;
   case 2: 
-    mtype = G4P.INFO; 
+    mtype = G4P.INFO_MESSAGE;
     break;
   case 3: 
-    mtype = G4P.WARNING; 
+    mtype = G4P.WARN_MESSAGE;
     break;
   case 4: 
-    mtype = G4P.QUERY; 
+    mtype = G4P.QUERY_MESSAGE;
     break;
   }
   String message = txfSMMessage.getText();
@@ -100,19 +112,19 @@ public void handleOptionDialog() {
   switch(od_mtype) {
   default:
   case 0: 
-    mtype = G4P.PLAIN; 
+    mtype = G4P.PLAIN_MESSAGE; 
     break;
   case 1: 
-    mtype = G4P.ERROR; 
+    mtype = G4P.ERROR_MESSAGE; 
     break;
   case 2: 
-    mtype = G4P.INFO; 
+    mtype = G4P.INFO_MESSAGE; 
     break;
   case 3: 
-    mtype = G4P.WARNING; 
+    mtype = G4P.WARN_MESSAGE; 
     break;
   case 4: 
-    mtype = G4P.QUERY; 
+    mtype = G4P.QUERY_MESSAGE;
     break;
   }
   // Determine the option type

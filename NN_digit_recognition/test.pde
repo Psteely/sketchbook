@@ -1,8 +1,11 @@
-import java.util.Arrays;
+
 void test () {
+  
   println("Testing table load starts");
-  csvReader = loadTable("mnist_test.csv");      // read in the file
+  csvReader = loadTable("../../bigdata/mnist_test.csv");      // read in the file
   println("Testing table load ends");
+  
+  
   //noStroke();
   //currentRow = (int) random(csvReader.getRowCount()-1);  
   testing = new float[csvReader.getRowCount()][784];   // set up training data array

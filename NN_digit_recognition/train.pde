@@ -1,6 +1,7 @@
 void train () {
+  
   println("Training table load starts");
-  csvReader = loadTable("mnist_train_10000.csv");      // read in the file
+  csvReader = loadTable("../../bigdata/mnist_train_10.csv");      // read in the file
   println("Training table load ends");
   //noStroke();
   //currentRow = (int) random(csvReader.getRowCount()-1);  

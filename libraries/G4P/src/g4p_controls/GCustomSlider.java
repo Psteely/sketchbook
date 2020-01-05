@@ -137,6 +137,12 @@ public class GCustomSlider extends GLinearTrackControl {
 		);
 		registeredMethods = PRE_METHOD | DRAW_METHOD | MOUSE_METHOD;
 		cursorOver = HAND;
+		
+		// Font to use
+		localFont = G4P.sliderFont;
+		bufferInvalid = true;
+
+		// Must register control
 		G4P.registerControl(this);
 	}
 

@@ -84,6 +84,11 @@ public class GLabel extends GTextIconBase {
 
 		// Now register control with applet
 		registeredMethods = DRAW_METHOD;
+		
+		// Font to use
+		localFont = G4P.displayFont;
+		bufferInvalid = true;
+
 		// Must register control
 		G4P.registerControl(this);
 	}
@@ -168,6 +173,7 @@ public class GLabel extends GTextIconBase {
 			bufferInvalid = false;
 			buffer.beginDraw();
 			Graphics2D g2d = buffer.g2;
+			g2d.setFont(localFont);
 			// **********************************************************************************************************
 			// **********************************************************************************************************
 			// **********************************************************************************************************
@@ -180,7 +186,6 @@ public class GLabel extends GTextIconBase {
 			// **********************************************************************************************************
 			// **********************************************************************************************************
 			// **********************************************************************************************************
-			g2d.setFont(localFont);
 
 			// Get the latest lines of text
 			LinkedList<TextLayoutInfo> lines = stext.getLines(g2d);	
