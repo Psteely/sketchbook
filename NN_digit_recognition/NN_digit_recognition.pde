@@ -20,9 +20,11 @@ int currentRow;
 void setup() {
   surface.setSize(28 * pixelSize, 28 * pixelSize);  // only for showing the number
 
-  nn = new NeuralNetwork(784, 128, 10);
+  nn = new NeuralNetwork(784, 256, 10);
+  train(1);
+  train(2);
+  
 
-  train();
   test();
 }
 

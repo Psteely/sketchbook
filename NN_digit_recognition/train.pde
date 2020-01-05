@@ -1,7 +1,17 @@
-void train () {
-  
-  println("Training table load starts");
-  csvReader = loadTable("../../bigdata/mnist_train_10.csv");      // read in the file
+void train (int num) {
+
+csvReader = null;
+  if (num == 1) {
+    println("Training table A load starts");
+    csvReader = loadTable("../../bigdata/mnist_train_20000a.csv");      // read in the file
+  } else if (num == 2) {
+    println("Training table B load starts");
+    csvReader = loadTable("../../bigdata/mnist_train_20000b.csv");      // read in the file
+  } else if (num == 3) {
+    println("Training table C load starts");
+    csvReader = loadTable("../../bigdata/mnist_train_20000c.csv");      // read in the file
+  }
+
   println("Training table load ends");
   //noStroke();
   //currentRow = (int) random(csvReader.getRowCount()-1);  
@@ -21,7 +31,7 @@ void train () {
     }
   }
   // set up the nn
- 
+
   float[] in = new float[784];                               // array for inputs
   float[] lab = new float[10];                               // array for labels
   println("Training begins");
@@ -32,8 +42,7 @@ void train () {
     for (int j = 0; j <10; j++) {                            // grab each label array in a loop (must be a better way to do this 
       lab[j] = TrainingLabel[i][j];                                  // set the label array
     }
-     nn.train(in, lab, 0.1 );                                 // train that network
+    nn.train(in, lab, 0.1 );                                 // train that network
   }
   println("Training complete");
-  
 }
