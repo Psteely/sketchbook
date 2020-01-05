@@ -1,7 +1,9 @@
  //<>// //<>//
-
+ ArrayList <float[]> errors = new ArrayList<float[]>() ; 
+ 
 // MNIST csv are here https://pjreddie.com/projects/mnist-in-csv/ 
 NeuralNetwork nn;
+
 int in = 784;
 int middle = 256;
 int out = 10;
@@ -10,6 +12,7 @@ float[][] training;
 float[][] TrainingLabel;
 float[][] testing;
 float[][] TestingLabel;
+
 
 Table csvReader;
 TableRow csvRow;
@@ -23,7 +26,9 @@ void setup() {
   nn = new NeuralNetwork(784, 256, 10);
   train(1);
   train(2);
-  
+  train(3);
+
+
 
   test();
 }
@@ -32,16 +37,20 @@ void setup() {
 void draw() {
 
   background(255);
-  //if (training != null) {
-  //  for (int i = 0; i < csvReader.getColumnCount()-1; i++) {
-  //    fill(training[2][i]*255);
-  //    rect(pixelSize * (i % 28), pixelSize * (i / 28), pixelSize, pixelSize);
-  //  }
-  //}
+   
+  if (errors != null) {
+   float[] pic = new float[784];
+    pic = errors.get(0);
+    for (int i = 0; i < 784; i++) {
+      float val = pic[i];
+      fill(val*255);
+      rect(pixelSize * (i % 28), pixelSize * (i / 28), pixelSize, pixelSize);
+    }
+   
+  }
 }
 
 void keyPressed() {
-  currentRow = (int) key-48;
-  println(key);
-  println(currentRow);
+  println(errors.size());
+ 
 }

@@ -1,5 +1,6 @@
-
+ import java.util.Arrays;
 void test () {
+
   
   println("Testing table load starts");
   csvReader = loadTable("../../bigdata/mnist_test.csv");      // read in the file
@@ -62,6 +63,10 @@ void test () {
 
     if (expected == maxIndex) {
       numRight ++;
+    } else {
+      for (int e=0;e<784;e++) {
+      errors.addAll(Arrays.asList(in)); //<>//
+      }
     }
     
   }
