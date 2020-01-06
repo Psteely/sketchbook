@@ -64,9 +64,9 @@ void test () {
     if (expected == maxIndex) {
       numRight ++;
     } else {
-      for (int e=0;e<784;e++) {
+      //for (int e=0;e<784;e++) {
       errors.addAll(Arrays.asList(in)); //<>//
-      }
+      //}
     }
     
   }

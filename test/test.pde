@@ -1,18 +1,26 @@
-Table csvReader;
-void setup() {
-  train(1);
-  train(2);
-}
+float[] stuff1 = {1, 2, 3}; 
+float[] stuff2 = {4, 5, 6}; 
+ArrayList <float[]> list = new ArrayList<float[]>();
+list.add(stuff1); //<>//
+list.add(stuff2);
+printArray(list);
+println();
 
-void train (int num) {
+//Print Test 1
+println(list.get(0));
+println(list.get(1));
+println();
 
-  csvReader = null;
-  if (num == 1) {
-    println("Training table A load starts");
-    csvReader = loadTable("../../bigdata/mnist_train_20000a.csv");      // read in the file
-  } else if (num == 2) {
-    println("Training table B load starts");
-    csvReader = loadTable("../../bigdata/mnist_train_20000b.csv");      // read in the file
+//Print Test 2
+for (int i=0; i< 2; i++) 
+  {
+  println(list.get(i));
   }
-  println("Training table load ends");
-}
+println();
+
+ //Print Test 3  
+for (float[] i : list) 
+  {
+  println(i);  
+  }
+println();  

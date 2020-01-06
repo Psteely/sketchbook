@@ -24,7 +24,7 @@ void setup() {
   surface.setSize(28 * pixelSize, 28 * pixelSize);  // only for showing the number
 
   nn = new NeuralNetwork(784, 256, 10);
-  train(1);
+  //train(1);
   train(2);
   train(3);
 
@@ -51,6 +51,6 @@ void draw() {
 }
 
 void keyPressed() {
-  println(errors.size());
+  println(errors.size()); 
  
 }
